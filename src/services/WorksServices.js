@@ -4,7 +4,7 @@ import firebase from "../firebaseConfig"
 export const getAllCities=(onGetCities)=>{
 firebase
     .firestore()
-    .collection('city')
+    .collection('cities')
     .onSnapshot((snapshot)=>{
         const allCities = snapshot.docs.map((doc)=>({
             id:doc.id,
@@ -17,6 +17,6 @@ firebase
 export const addCity=(data)=>{
     firebase
         .firestore()
-        .collection('city')
+        .collection('cities')
         .add(data)
 }

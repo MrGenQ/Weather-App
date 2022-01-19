@@ -7,13 +7,16 @@ import { Table} from "react-bootstrap"
 import RenderWeek from "./RenderWeek"
 import * as service from "../services/WorksServices"
 import {useNavigate} from "react-router-dom"
-import {Button} from "react"
+import { GrAdd } from "react-icons/gr";
 import {useAuthState} from "react-firebase-hooks/auth";
 import {auth} from "../services/AutSevices";
 
 const ApiService = () => {
-    const [addCity, setAddCity] = useState(true)
-    const[cities, setCities] = useState([])
+    //const [addCity, setAddCity] = useState(true)
+    const[cities, setCities] = useState({
+        city: ''
+    })
+    const[works, setWorks] = useState([])
     const [error] = useAuthState(auth)
     const navigate = useNavigate()
     const [weather, setWeather] = useState([])
@@ -21,8 +24,7 @@ const ApiService = () => {
     const term = '/forecasts/long-term'
 
     useEffect(()=>{
-        setCities(localStorage.getItem('city'))
-        fetch(`${url}${cities}${term}`)
+        fetch(`${url}${localStorage.getItem('city')}${term}`)
             .then(response => response.json())
             .then(data=>{
                 setWeather(data)
@@ -34,14 +36,33 @@ const ApiService = () => {
             })
     
     },[cities])
-    const onSaveWorkHandler = (data)=>{
+    const toFirebase = (data) =>{
         service.addCity(data)
     }
-    console.log(typeof(cities))
+    useEffect(()=>{
+        setCities({
+            city: localStorage.getItem('city')
+        })
+    },[])
+    const onSaveWorkHandler = async (data)=>{
+        setCities({
+            city:data
+        })
+        console.log(cities) 
+        toFirebase(cities)
+    }
+    const MyCities = () =>{
+            service.getAllCities((works)=>setWorks(works))
+            console.log(works)
+    }
     return(
         <>
+            <div className="d-flex">
             <h3>{localStorage.getItem('city')}</h3>
+            <button className="btn btn-dark" variant="dark" onClick={()=>{onSaveWorkHandler(localStorage.getItem('city'))}}><GrAdd color="white" size={20}/>Add to My Locations</button>
+            <button className="btn btn-dark" onClick={()=>{MyCities()}}>My Cities</button>
             
+            </div>
             <section className="oneWeek d-flex">
                 <Table  striped bordered hover variant="light" responsive>
                     <tr height="200" width="400">
@@ -70,7 +91,6 @@ const ApiService = () => {
                 </tbody>
             </Table>
             </section>
-            
         </>
     )
 }

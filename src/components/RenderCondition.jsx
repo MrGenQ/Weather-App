@@ -42,7 +42,7 @@ const RenderCondition = (props) =>{
                 <td>
                     {IsNight()}
                     {(nightVariable === false)? DayIcons():NightIcons()}
-                    {(props.airTemperature >= 0)? ('+' + props.airTemperature):props.airTemperature}
+                    {(props.airTemperature > 0)? ('+' + props.airTemperature):props.airTemperature}
                 </td>
             </>
     )

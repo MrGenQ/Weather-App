@@ -3,12 +3,12 @@ import 'firebase/firestore'
 
 // Your web app's Firebase configuration
 const firebaseConfig = {
-    apiKey: "AIzaSyBJsJI40mFPAl4ZFMgyI1fI9OqlvdaDjhg",
-  authDomain: "timetable-2b046.firebaseapp.com",
-  projectId: "timetable-2b046",
-  storageBucket: "timetable-2b046.appspot.com",
-  messagingSenderId: "442332434439",
-  appId: "1:442332434439:web:1bed5ac3263473072f5aa2",
+  apiKey: "AIzaSyBNCxYZgc0zPgz414i5YYqSE0OqIssR2uY",
+  authDomain: "weather-ab362.firebaseapp.com",
+  projectId: "weather-ab362",
+  storageBucket: "weather-ab362.appspot.com",
+  messagingSenderId: "309821827275",
+  appId: "1:309821827275:web:fd7ee3c7ca1679a717534e",
   
 };
 
