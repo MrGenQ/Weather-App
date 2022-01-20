@@ -20,3 +20,11 @@ export const addCity=(data)=>{
         .collection('cities')
         .add(data)
 }
+export const deleteCity=(id)=>{
+    firebase
+        .firestore()
+        .collection('cities')
+        .doc(id)
+        .delete()
+    
+    }
